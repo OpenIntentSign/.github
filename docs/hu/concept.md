@@ -121,6 +121,41 @@ Ez az architektúra alkalmas akár gép-gép kommunikációra, akár emberek ál
 
 Ez a működésmód garantálja, hogy az igénylő és a szolgáltató kölcsönösen nem bíznak vakon egymásban, mégis működő, auditálható, kriptográfiailag biztosított kapcsolat jön létre.
 
+### Felmerült, megválaszolandó kérdések 
+
+1. **Kulcs visszavonási és érvényességi mechanizmusok**
+   A rendszerben használt kulcsok érvényessége és biztonsága kiemelt kérdés. Ha egy privát kulcs kompromittálódik, annak használata biztonsági kockázatot jelenthet. Ezért szükséges:
+
+    * Kulcsonként időbélyeget és lejárati időt tárolni.
+    * Egy kulcs érvényességi idejét a metaadatok tartalmazzák, ezzel jelezve, hogy az adott kulcs milyen időintervallumban használható.
+    * Szükség lehet egy **helyi CRL** (Certificate Revocation List) mechanizmusra vagy OCSP-szerű lekérdezési módszerre, még akkor is, ha a rendszer offline működésre is képes – ez utóbbit például **előre leszinkronizált revocation-listával** lehet megoldani.
+
+2. **Több entitásos (delegált) működés**
+   Ha a válaszadást nem maga a végső szolgáltató, hanem egy proxy végzi, biztosítani kell az eredeti entitás hitelességét:
+
+    * A válasz aláírását a delegált szolgáltató végzi, de a proxy szerepét metaadatokban (pl. `delegator`, `acting-on-behalf-of`) fel kell tüntetni.
+    * Lehetőség van **delegációs lánc** kiépítésére, ahol minden résztvevő fél aláírja a lekérdezést vagy választ, vagy a lánc első és utolsó tagja kriptográfiailag hitelesíti a kapcsolatot.
+
+3. **Válasz tárolhatósága és cache-elhetősége**
+   Az OIS alapvetően dinamikus, egyedi igényekre válaszoló modell, de vannak esetek, amikor a válasz cache-elése indokolt:
+
+    * A válasz `meta` mezőjében szerepelhet egy TTL (Time To Live) érték, ami azt jelzi, meddig tekinthető érvényesnek a válasz.
+    * A `signature` és a `timestamp` együtt biztosítja, hogy egy válasz újrafelhasználása ne járjon kockázattal – amennyiben a célrendszer validálja az aláírás frissességét és érvényességét.
+
+4. **Integrációs interfészek**
+   Az OIS célja, hogy alkalmazásrétegű és protokollfüggetlen legyen. Ezért:
+
+    * REST: jól alkalmazható, különösen mikroszolgáltatásos architektúrákban.
+    * gRPC: nagy teljesítményű, bináris-alapú megoldás, ami strukturált schema-támogatással bír.
+    * MQTT: eseményvezérelt rendszerekben vagy edge-eszközöknél ajánlott.
+    * Adapterek segítségével a titkosítás és az aláírás beilleszthető bármelyik fenti rétegbe, akár `middleware` vagy `gateway` szinten is.
+
+5. **Tartalomfüggő szabálymotor lehetősége**
+   Az egyszerű jogosultságellenőrzés helyett az OIS támogatja a **tartalomfüggő döntéshozatalt** is:
+
+    * A metaadatok vagy a dekódolt `data` mező alapján futtatható egy logikai szabályrendszer, amely figyelembe veszi az **időpontot**, a **kérelmezett adattípust**, a **rendszerterheltséget**, vagy akár a **geolokációt** is.
+    * Ezzel finomhangolható, hogy mikor, milyen feltételek mellett engedélyezhető egy lekérdezés – például: ugyanaz az entitás egyes napokon vagy műszakokban más jogosultságokat élvez.
+
 ---
 
 ### Nyílt modell
