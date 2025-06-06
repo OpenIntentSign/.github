@@ -88,7 +88,6 @@ Ez az architektúra alkalmas akár gép-gép kommunikációra, akár emberek ál
         * a saját gyökérkulcsával ír alá, vagy
         * egy hitelesítő szolgáltatás (CA) által aláírat.
     * A publikus kulcsba beágyazza a jogosultságait leíró metaadatokat (pl. szerepkör, elérési szint, időbélyeg, cél).
-    * A publikus kulcsba beágyazza a jogosultságait leíró metaadatokat (pl. szerepkör, elérési szint, időbélyeg, cél).
 
 2. **Kérés összeállítása:**
 
@@ -107,7 +106,7 @@ Ez az architektúra alkalmas akár gép-gép kommunikációra, akár emberek ál
     * Amennyiben érvényes, dekódolja a `data` mezőt,
 
         * és **visszaellenőrzi az adatok integritását** az aláírással,
-        * majd végrehajtja a lekérdezést. végrehajtja a lekérdezést.
+        * majd végrehajtja a lekérdezést.
 
 4. **Válasz küldése:**
 
@@ -121,7 +120,7 @@ Ez az architektúra alkalmas akár gép-gép kommunikációra, akár emberek ál
 
 Ez a működésmód garantálja, hogy az igénylő és a szolgáltató kölcsönösen nem bíznak vakon egymásban, mégis működő, auditálható, kriptográfiailag biztosított kapcsolat jön létre.
 
-### Felmerült, megválaszolandó kérdések 
+### Felmerült, megválaszolandó kérdések
 
 1. **Kulcs visszavonási és érvényességi mechanizmusok**
    A rendszerben használt kulcsok érvényessége és biztonsága kiemelt kérdés. Ha egy privát kulcs kompromittálódik, annak használata biztonsági kockázatot jelenthet. Ezért szükséges:
