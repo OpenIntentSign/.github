@@ -104,7 +104,10 @@ Ez az architektúra alkalmas akár gép-gép kommunikációra, akár emberek ál
 3. **Szolgáltató feldolgozása:**
 
     * A rendszer az igény `pubkey` mezőjéből kinyeri a jogosultságinformációkat, és összeveti az adott kérés kontextusával.
-    * Amennyiben érvényes, dekódolja a `data` mezőt, végrehajtja a lekérdezést.
+    * Amennyiben érvényes, dekódolja a `data` mezőt,
+
+        * és **visszaellenőrzi az adatok integritását** az aláírással,
+        * majd végrehajtja a lekérdezést. végrehajtja a lekérdezést.
 
 4. **Válasz küldése:**
 
