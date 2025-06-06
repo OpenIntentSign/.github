@@ -112,6 +112,7 @@ Ez az architektúra alkalmas akár gép-gép kommunikációra, akár emberek ál
 4. **Válasz küldése:**
 
     * A szolgáltató az eredményt titkosítja az igénylő által megadott publikus kulccsal (azaz csak az igénylő tudja visszafejteni).
+    * A válasz alá van írva a szolgáltató privát kulcsával, így az igénylő hitelesíteni tudja a forrást és az adatok integritását.
     * A válasz ismét három mezőből áll:
 
         * `meta`: válaszcímkék, állapot, stb.
