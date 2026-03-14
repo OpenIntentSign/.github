@@ -1,0 +1,15 @@
+tags:
+  - doc
+  - core
+  - compliance
+related_nodes:
+  - README
+category:
+  - concept
+  - architecture
+entrypoint: true
+used_in:
+  - architecture-review
+  - onboarding
+description: |
+  Az OpenIntentSign (OIS) koncepcióleírása magyarul. Nyílt, tartalomfüggő érvényesítési modell a deklarált és valós rendszerállapot összhangját biztosítja, titkosított adatáramlással és átlátható döntési logikával.

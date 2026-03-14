@@ -1,0 +1,15 @@
+tags:
+  - doc
+  - core
+  - compliance
+related_nodes:
+  - docs/hu/concept
+  - LICENSE
+category:
+  - concept
+entrypoint: true
+used_in:
+  - onboarding
+  - architecture-review
+description: |
+  Root README for OpenIntentSign: a trust-based validation model and open architecture for ensuring state integrity across decentralized, modular infrastructure systems.

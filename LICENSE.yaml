@@ -1,0 +1,13 @@
+tags:
+  - legal
+  - license
+  - doc
+related_nodes:
+  - README
+category:
+  - legal
+entrypoint: false
+used_in:
+  - distribution
+description: |
+  License document for OpenIntentSign. Defines the terms and conditions for use, distribution, and modification of the OpenIntentSign framework.
